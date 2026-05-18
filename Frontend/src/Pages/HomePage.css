@@ -1,0 +1,33 @@
+.homecontainer {
+    text-align: center;
+}
+
+.homeimage {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
+
+}
+
+.homecontent {
+    position: absolute;
+    top: 50%;
+    bottom: 40%;
+    left: 40%;
+    right: 20%;
+    text-align: center;
+}
+
+.homecontent h1{
+    font-size: 48px;
+    margin-bottom: 10px;
+    font-style: oblique;
+
+}
+
+.homecontent h2{
+    font-style: italic;
+    padding-left: 50%;
+    color: darkgoldenrod;
+}

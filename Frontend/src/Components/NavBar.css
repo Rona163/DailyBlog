@@ -1,0 +1,38 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: rosybrown;
+    align-items: center;
+    padding: 30px 40px;
+    color:black;
+}
+
+.logo {
+    color:black;
+    font-style: oblique;
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.nav-link{
+    color:black;
+    font-style: oblique;
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logout-button {
+    color:black;
+    font-style: oblique;
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: none; 
+    cursor: pointer;
+}
