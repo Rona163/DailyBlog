@@ -11,7 +11,6 @@ const MyProfilePage = () => {
 
     useEffect(() => {
         const fetchMyPosts = async () => {
-            console.log("fetchposts");
             try {
                 const data = await getMyPosts();
                 setPosts(data.post);
@@ -59,52 +58,63 @@ const MyProfilePage = () => {
     };
 
     return (
-        <div>
-            <h2>My Profile</h2>
+            <div>
+        <h2>My Profile</h2>
 
-            {posts.map((post) => (
+        {posts.length === 0 ? (
+
+            <p className="no-posts">
+                No posts yet
+            </p>
+
+        ) : (
+
+            posts.map((post) => (
                 <div key={post._id} className="post-card">
-                    {editingPostId === post._id ? (
 
-                    <>
-                        <input
-                            value={editTitle}
-                            onChange={(e) => setEditTitle(e.target.value)}
-                        />
+                    {editingPostId === post._id? (
 
-                        <textarea
-                            value={editContent}
-                            onChange={(e) => setEditContent(e.target.value)}
-                        />
+                        <>
+                            <input
+                                value={editTitle}
+                                onChange={(e) => setEditTitle(e.target.value)}
+                            />
 
-                        <button onClick={() => handleUpdatePost(post._id)}>
-                            Save
-                        </button>
+                            <textarea
+                                value={editContent}
+                                onChange={(e) => setEditContent(e.target.value)}
+                            />
 
-                        <button onClick={() => setEditingPostId(null)}>
-                            Cancel
-                        </button>
-                    </>
+                            <button onClick={() => handleUpdatePost(post._id)}>
+                                Save
+                            </button>
 
-                ) : (
-                    <>
+                            <button onClick={() => setEditingPostId(null)}>
+                                Cancel
+                            </button>
+                        </>
 
-                        <h3>{post.title}</h3>
-                        <p>{post.content}</p>
+                    ) : (
 
-                        <button onClick={() => handleEditClick(post)}>
-                            Edit
-                        </button>
+                        <>
+                            <h3>{post.title}</h3>
 
-                        <button onClick={() => handleDelete(post._id)}>
-                            Delete
-                        </button>
+                            <p>{post.content}</p>
 
-                    </>
-                )}
+                            <button onClick={() => handleEditClick(post)}>
+                                Edit
+                            </button>
+
+                            <button onClick={() => handleDelete(post._id)}>
+                                Delete
+                            </button>
+                        </>
+                    )}
+
                 </div>
-            ))}
-        </div>
+            ))
+        )}
+    </div>
     );
 };
 

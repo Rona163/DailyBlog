@@ -33,7 +33,6 @@ app.use("/api/auth", loginRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-
 const PORT = process.env.PORT;
 const URL = process.env.URL;
 

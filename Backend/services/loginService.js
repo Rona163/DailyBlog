@@ -33,7 +33,7 @@ const loginUser = async(data) => {
     await user.save(); //saving the refresh token in the database
 
     return { accessToken, refreshToken, 
-            user:{ username: user.username, email: user.email, role: user.role}};
+            user:{ id: user._id, username: user.username, email: user.email, role: user.role}};
 }
 
 const refreshToken = async(token) => {

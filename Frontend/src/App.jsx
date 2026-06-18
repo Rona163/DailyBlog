@@ -1,7 +1,6 @@
-import './App.css'
-import CreatePost from './Components/CreatePost'
 import NavBar from './Components/NavBar'
 import AppRoutes from './Routes/AppRoutes'
+import './App.css'
 
 function App() {
 

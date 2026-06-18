@@ -1,5 +1,6 @@
 const { compare } = require("bcrypt");
 const Post = require("../models/postModel");
+const User = require("../models/userModel");
 
 const createPost = async(data, userId) => {
     const {title, content} = data;
@@ -7,13 +8,14 @@ const createPost = async(data, userId) => {
         throw new Error("All fields are required");
     }
 
+    const user = await User.findById(userId);
     const post = await Post.create({
         title,
         content,
         user: userId
     });
     
-    return post;
+    return { post, username: user.username};
 };
 
 const updatePost = async(data, userId, postId,  userRole) => {

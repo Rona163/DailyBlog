@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { addComment, getComments, deleteComment, getMe } from "../api/commentApi";
+import './CommentSection.css';
 
 const CommentSection = ({ postId }) => {
 
@@ -11,7 +12,6 @@ const CommentSection = ({ postId }) => {
     useEffect(() => {
         const fetchUser = async () => {
             const user = await getMe();
-            console.log("CURRENT USER:", user);
             setCurrentUser(user);
         };
 
@@ -25,9 +25,7 @@ const CommentSection = ({ postId }) => {
             try {
                 const data = await getComments(postId);
 
-                console.log("COMMENTS API RESPONSE:", data);
-
-                // IMPORTANT: backend sends { comment: [...] }
+                //backend sends {comment: [...]}
                 setComments(data.comment);
 
             } catch (error) {
@@ -49,8 +47,6 @@ const CommentSection = ({ postId }) => {
 
             const data = await addComment(postId, text);
 
-            console.log("NEW COMMENT RESPONSE:", data);
-
             setComments((prev) => [...prev, data.comment]);
             setText("");
 
@@ -61,8 +57,6 @@ const CommentSection = ({ postId }) => {
 
     const handleDeleteComment = async (commentId) => {
         try {
-
-            console.log("DELETE COMMENT ID:", commentId);
 
             await deleteComment(commentId);
 
@@ -78,42 +72,65 @@ const CommentSection = ({ postId }) => {
     return (
         <div className="comment-box">
 
-            <h4>Comments</h4>
+            <h4 className="comment-title">
+                Comments
+            </h4>
 
-            {Array.isArray(comments) &&
-                comments.map((c) => {
+            <div className="comments-container">
 
-                    console.log("COMMENT OBJECT:", c);
-                    console.log("COMMENT USER ID:", c.user?._id);
-                    console.log("CURRENT USER ID:", currentUser?._id);
+                {Array.isArray(comments) &&
+                    comments.map((c) => (
+                        <div
+                            key={c._id}
+                            className="single-comment"
+                        >
 
-                    return (
-                        <div key={c._id} className="single-comment">
+                            <div className="comment-header">
 
-                            <b>{c.user?.username || "Unknown User"}</b>
-                            <p>{c.text}</p>
+                                <span className="comment-username">
+                                    {c.user?.username || "Unknown User"}
+                                </span>
 
-                            {/* DELETE BUTTON DEBUG CHECK */}
-                            {currentUser?.id && c.user?._id === currentUser?.id && (
-                                <button onClick={() => handleDeleteComment(c._id)}>
-                                    Delete
-                                </button>
-                            )}
+                                {currentUser?.id === c.user?._id && (
+                                    <button
+                                        className="delete-btn"
+                                        onClick={() =>
+                                            handleDeleteComment(c._id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                )}
+
+                            </div>
+
+                            <p className="comment-text">
+                                {c.text}
+                            </p>
 
                         </div>
-                    );
-                })
-            }
+                    ))
+                }
 
-            <input
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Write a comment..."
-            />
+            </div>
 
-            <button onClick={handleAddComment}>
-                Add Comment
-            </button>
+            <div className="comment-input-section">
+
+                <input
+                    className="comment-input"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="Write a comment..."
+                />
+
+                <button
+                    className="comment-btn"
+                    onClick={handleAddComment}
+                >
+                    Add Comment
+                </button>
+
+            </div>
 
         </div>
     );

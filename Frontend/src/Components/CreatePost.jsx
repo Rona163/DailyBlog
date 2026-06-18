@@ -18,8 +18,7 @@ const CreatePost = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         try{
-            const data = await createPost(formData);
-            console.log(data);
+            await createPost(formData);
             alert("Post Created");
             setFormData({
                 title: "",
@@ -32,13 +31,24 @@ const CreatePost = () => {
     };
 
     return (
-        <div>
-            <h2>Create Post</h2>
-            <form onSubmit={handleSubmit} className="createpost">
-                <input type="text" name="title" placeholder="Enter title" value={formData.title} onChange={handleChange}/>
-                <input type="text" name="content" placeholder="Write your content here" value={formData.content} onChange={handleChange}/>
-                <button type="submit">Post</button>
-            </form>
+        <div className="create-post-page">
+
+            <div className="create-post-card">
+
+                <h2>Create Post</h2>
+
+                <form onSubmit={handleSubmit} className="createpost">
+
+                    <input type="text" name="title" placeholder="Enter title" value={formData.title} onChange={handleChange}/>
+
+                    <textarea name="content" placeholder="Write your content here..." value={formData.content} onChange={handleChange} rows="6"/>
+
+                    <button type="submit">Post</button>
+
+                </form>
+
+            </div>
+
         </div>
     )
 };

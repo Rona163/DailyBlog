@@ -9,6 +9,7 @@ export const registerUser = async(userData) => {
 };
 
 export const loginUser = async(userData) => {
+        console.log("authapi");
         const response = await API.post(
             "/auth/login",
             userData

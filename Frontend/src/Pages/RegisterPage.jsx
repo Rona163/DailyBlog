@@ -23,8 +23,7 @@ const RegisterPage = () => {
         e.preventDefault();
 
         try{
-            const data = await registerUser(formData);
-            console.log(data);
+            await registerUser(formData);
             alert("Registered Successfully");
             navigate('/login');
         } catch(error) {

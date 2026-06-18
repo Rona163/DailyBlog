@@ -20,8 +20,13 @@ const LoginPage = () => {
         e.preventDefault();
 
         try{
+
             const data = await loginUser(formData);
-            console.log(data);
+             
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
 
             localStorage.setItem(
                 "accessToken",
@@ -34,6 +39,7 @@ const LoginPage = () => {
             );
             alert("Login Successfull");
             navigate('/dashboard');
+            window.location.reload()
         } catch(error) {
             console.log(error);
             alert(error.response.data.message);

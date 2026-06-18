@@ -27,7 +27,8 @@ const refreshToken = async(req,res) => {
         });
 
         return res.json({
-            accessToken: newAccessToken
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken
         });
 
     } catch (err) {
